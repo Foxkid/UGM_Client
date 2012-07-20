@@ -1,0 +1,97 @@
+
+/*---------------------------------ListUsers-------------------------------*/
+    #contentContainer .innerContent ul {
+		background-color:#fff;
+		border:1px solid #BEC7E3;
+		width:100%;
+		position:relative;
+	}
+			
+	#contentContainer .innerContent ul li {
+		background-color:#F6F8FA;
+		margin-top:2px;
+		margin-bottom:2px;
+		height:72px;
+		position:relative;
+	}
+	
+	li.list_li.hovered {
+		background-color:red;
+	}	
+
+	#contentContainer .innerContent ul .normalButton {
+		
+	}
+	
+
+	#contentContainer .innerContent ul .normalButton.makeCopyButton {
+		padding:6px; 
+		top:20px; 
+		right:40px;
+	}
+
+	#contentContainer .innerContent ul .normalButton.deleteButton {
+		padding:6px; 
+		top:20px; 
+		right:4px; 
+		width:20px; 
+		text-align:center; 
+		background-color:#A25627; 
+		font-weight:bold;
+	}
+	
+	#contentContainer .innerContent ul li.hovered .normalButton {
+		display:block !important;
+	}
+	
+	
+	#contentContainer .innerContent ul li .preview {
+		position:absolute;
+		top:6px;
+		left:4px;
+		width:84px;
+		height:63px;
+		background-image:url(../../images/iPadThumbBack.png);
+		background-repeat:no-repeat;
+	}
+	
+	#contentContainer .innerContent ul li .preview .color {
+		position:absolute;
+		left:11px;
+		top:8px;
+		width:61px;
+		height:46px;
+		background-color:#ff0000;
+	}
+	
+	#contentContainer .innerContent ul li span.title {
+		position:absolute;
+		color:#03326B;
+		font-size:20px;
+		top:6px;
+		left:100px;
+	}
+
+	#contentContainer .innerContent ul li p.description {
+		position:absolute;
+		color:#7A8EB8;
+		font-size:14px;
+		top:20px;
+		height:36px;
+		width:600px;
+		overflow:hidden;
+		left:100px;
+	}
+	
+	#contentContainer .innerContent ul li .hotspot {
+		background-image:url(../images/clearPixel.png);
+		width:100%;
+		height:100%;
+		position:absolute;
+		top:0px;
+		left:0px;
+		cursor:pointer;
+	}	
+	.hover-enabled {
+		background-color: red;
+	}
