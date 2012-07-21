@@ -23,4 +23,14 @@
     <servlet-name>DisplayUsers</servlet-name>
     <url-pattern>/DisplayUsers</url-pattern>
   </servlet-mapping>  
+  <servlet>
+    <description></description>
+    <display-name>DisplayGroups</display-name>
+    <servlet-name>DisplayGroups</servlet-name>
+    <servlet-class>client.application.servlets.DisplayGroups</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DisplayGroups</servlet-name>
+    <url-pattern>/DisplayGroups</url-pattern>
+  </servlet-mapping>
 </web-app>

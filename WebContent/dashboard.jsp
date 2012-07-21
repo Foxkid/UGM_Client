@@ -1,4 +1,10 @@
-	
+	<!-- 
+		Authors - FLIPTEAM (FRAMEHAWK.COM)
+		CONTACT - FLIP@FRAMEHAWK.COM
+		DATE MODIFIED - 19th July 2012
+		INFO - Shows the dashboard once the user login is successful. 		
+					
+	-->
 	<%@ include file="jsp/header.jsp"%>   
 	
     <div id="contentContainer">      

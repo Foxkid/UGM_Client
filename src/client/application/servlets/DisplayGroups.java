@@ -21,6 +21,8 @@ import org.apache.http.message.BasicNameValuePair;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import fh.resources.json.FHGroupClass;
+import fh.resources.json.FHuserClass;
 import fh.resources.json.JSONClass;
 import fh.resources.json.JSONMessage;
 
@@ -40,7 +42,7 @@ import fh.resources.json.JSONMessage;
 	}   	
  	
 	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String action = request.getParameter("action");
 		String gname = request.getParameter("getgroupbyname");
@@ -71,7 +73,7 @@ import fh.resources.json.JSONMessage;
 		HttpPost httpPost = new HttpPost("http://localhost:8080/FID/DisplayGroups");
 		ArrayList<NameValuePair> postParameters = new ArrayList<NameValuePair>();
 		
-		//Send post it as a "json_message" paramter.
+		//Send post it as a "json_message" parameter.
     	postParameters.add(new BasicNameValuePair("json_message", jsonStringGroupList));
     	postParameters.add(new BasicNameValuePair("action", action));
     	postParameters.add(new BasicNameValuePair("getgroupbyname", gname));
@@ -93,11 +95,28 @@ import fh.resources.json.JSONMessage;
 		JSONMessage result = new Gson().fromJson(displayGroupResponse, type);
 		JSONClass jsonPayload = result.getMessagePayload();
 		
-		if(jsonPayload.isSuccess()) {
-			getServletContext().getRequestDispatcher("/dashboard.jsp").forward(request, response);
+		ArrayList<FHGroupClass> FHGroupList = new ArrayList<FHGroupClass>();
+		FHGroupList = (ArrayList<FHGroupClass>)jsonPayload.getFHGroupClassList();
+		
+		if(action.equals("display"))
+		{		
+			request.setAttribute("groupList", FHGroupList);
+			getServletContext().getRequestDispatcher("/DisplayGroups.jsp").forward(request, response);
 		}
-		else {
-			request.getRequestDispatcher("/addGroup.jsp").forward(request,response);
+		else if(action.equals("getGroup"))
+		{	
+			for(int i=0;i<FHGroupList.size();i++)
+			{	
+				if(FHGroupList.get(i).getGroup_name().equals(gname))
+				{
+					 request.setAttribute("gid", FHGroupList.get(i).getId());
+					request.setAttribute("groupname", gname);
+					request.setAttribute("description", FHGroupList.get(i).getDescription());
+					
+			  }
+			}
+			getServletContext().getRequestDispatcher("/modifyGroup.jsp").forward(request, response);
 		}
+		else{}
 	}   
 }

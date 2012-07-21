@@ -1,3 +1,10 @@
+	<!-- 
+		Authors - FLIPTEAM (FRAMEHAWK.COM)
+		CONTACT - FLIP@FRAMEHAWK.COM
+		DATE MODIFIED - 19th July 2012
+		INFO - This is the index page of the UGM Client. 		
+					
+	-->
 	
 	<%@ include file="jsp/header.jsp"%>   
 	
@@ -15,23 +22,8 @@
 	    	</div>
         </div>            
     </div>
-    <script type="text/javascript">
-	    $(document).ready(function(){            
-	    	$('#logoutForm').css('display','none');  
-	    });
-	    
-		$('#username').blur(function(){
-			$validationResult = validate($("#username").val());			
-			if($validationResult==false) { 
-				$('#error_username').css('display','inline');
-				$('#error_username').css('color','red');
-				$("#username").val("");
-	            $('#username').focus();
-			}
-			if($validationResult==true) { 
-				$('#error_username').css('display','none');
-			}
-		});
-	</script>
+    
+    <script src="js/utility.js" type="text/javascript"></script>
+    
 	<%@ include file="jsp/footer.jsp"%>   
    
