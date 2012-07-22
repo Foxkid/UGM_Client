@@ -26,15 +26,16 @@
 						FHGroupClass fhgroup = new FHGroupClass();
 						fhgroup = (FHGroupClass)i.next();
 				%>
-						<li onclick="submitgroup('<%= fhgroup.getGroup_name()%>');">
+						<li>
+							<div class="SelectedUserID" style="display: none;" id="groupid"> <%=fhgroup.getId()%> </div>
 							<div class="hotspot">
 	                			<div class="preview">
 	                				<div class="color" style="background-color:#00316D"></div>
 	               				</div>
 	               		 		<span class="title" > <%=fhgroup.getGroup_name()%> </span>
 	                			<p class="description" > <%= fhgroup.getDescription()%></p>         	    
-	                			<a class="normalButton absoluteTopRight makeCopyButton"  href="profile/" id="makeCopy" style="display: none">+ Make Copy</a>
-	                			<a class="normalButton absoluteTopRight deleteButton" href="profile/" id="delete_hover" style="display: none">X</a>
+	                			<a class="normalButton absoluteTopRight makeCopyButton" id="makeCopy" style="display: none">+ Make Copy</a>
+	                			<a class="normalButton absoluteTopRight deleteButton" id="delete_hover" style="display: none">X</a>
                 			</div>
                 		</li>
                 <% } %>

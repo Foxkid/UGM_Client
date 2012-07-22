@@ -3,13 +3,14 @@ package client.application.servlets;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -24,57 +25,50 @@ import server.connection.ServerConnectionHandler;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import fh.resources.json.FHuserClass;
+import fh.resources.json.FHGroupClass;
 import fh.resources.json.JSONClass;
 import fh.resources.json.JSONMessage;
 
-/**
- * Servlet implementation class for Servlet: Login
- *
- */
- public class Login extends javax.servlet.http.HttpServlet implements javax.servlet.Servlet {
-    static final long serialVersionUID = 1L;
+public class DeleteGroup extends HttpServlet {
+	private static final long serialVersionUID = 1L;
    
-    
-	public Login() {
-		super();
-	}
-	
+    public DeleteGroup() {
+        super();
+    }
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		//Specify the Resource to be used on the server side.
-		String ResourceName = "Login";
+		String ResourceName = "DeleteGroup";
 		
-		String username = request.getParameter("username");
-		String password = request.getParameter("password");
+		PrintWriter out = response.getWriter();		
+		String group_id = request.getParameter("groupid");
+		
+		//Create deleteGroupMessage/Json
+		FHGroupClass group = new FHGroupClass();
+		group.setId(group_id);
+		
+		JSONClass jclass = new JSONClass();
+		jclass.setFHGroup(group);
 		
 		JSONMessage json_message = new JSONMessage();
-		FHuserClass user = new FHuserClass();
-		JSONClass jclass= new JSONClass();
-		
-		//Add the user details to the 
-		user.setEmail(username);
-		user.setPassword(password);		
-		jclass.setFHUser(user);
-		
-		//Set the message payload.
+		json_message.setMessageType("deleteGroupMessage");
 		json_message.setMessagePayload(jclass);
 		
-		//Get the final json string.
-		String jsonStringUserLogin = new Gson().toJson(json_message);
+		//Forward deleteUserMessage/Json
+		String jsonDeleteGroupString = new Gson().toJson(json_message);
 		
-		//Call the FID Service to authenticate the credentials.		
+		///Create a HTTP client
 		DefaultHttpClient client = new DefaultHttpClient();
 		
 		//Create a server connection handler.
 		String ResourceUrl = new ServerConnectionHandler().getResourceURL(ResourceName);
-		
+					
 		//The URL refers to the servlet as per the web.xml on the FID.
 		HttpPost httpPost = new HttpPost(ResourceUrl);
 		ArrayList<NameValuePair> postParameters = new ArrayList<NameValuePair>();
 		
-		//Send post it as a "json_message" paramter.
-    	postParameters.add(new BasicNameValuePair("json_message", jsonStringUserLogin)); 
+		//Send post it as a "json_message" parameter.
+    	postParameters.add(new BasicNameValuePair("json_request_message", jsonDeleteGroupString));
     	httpPost.setEntity(new UrlEncodedFormEntity(postParameters));
 		HttpResponse fidresponse = client.execute(httpPost);		
 		
@@ -88,25 +82,20 @@ import fh.resources.json.JSONMessage;
 			FID_response=FID_response+lineRead;
 		}
 		
-		//De-serialize the JSON using the custom library (fh.resources.json)		
+		//Read the JSON Message.
+		String deleteUserResponse = (String)FID_response;
 		Type type = new TypeToken<JSONMessage>() {}.getType();
-		JSONMessage result = new Gson().fromJson(FID_response, type);
+		JSONMessage result = new Gson().fromJson(deleteUserResponse, type);
 		JSONClass jsonPayload = result.getMessagePayload();
 		
+		
+		//Send the appropriate error message back to the JSP.		
 		if(jsonPayload.isSuccess()){
-			//Login Successful. Assign User Session
-			HttpSession session = request.getSession(true);	
-			session.setAttribute("usernameSession",  (String)username);		
-			
-			//Display the user dashboard.
-			request.setAttribute("loginCode", jsonPayload.getResultCode());
-			request.getRequestDispatcher("/dashboard.jsp").forward(request,response);
-			
-		}else {
-			//Login Faliure.Need to pass the msg backward.
-			request.setAttribute("loginCode", jsonPayload.getResultCode());
-			request.getRequestDispatcher("/").forward(request,response);
-			
-		}
-	}	 	  	    
+			out.print("SUCCESS");
+		} else {
+			out.print("ERROR");
+		}		
+		
+	}
+
 }

@@ -17,23 +17,44 @@ $('ul.list li').hover(function(){
 
 $(".deleteButton").click(function() {
 	var parent = $(this).parent().parent();
-	//parent.fadeOut('slow', function() {$(this).remove();});
-	var userid = $(this).parent().parent().children(".SelectedUserID").html();
-	$.ajax({
-		type: "POST",
-		url: "DeleteUser",
-		data: "userid="+ userid,
-		cache: false,
-		success: function(msg)
-		{
-			if(msg != 'ERROR'){				
-				parent.slideUp('slow', function() {$(this).remove();});
-			}
-			else{
-				alert("Sorry! There was some problem.");
-			}			
-		}		
-	});
+	//parent.fadeOut('slow', function() {$(this).remove();});	
+	var type = $(this).parent().parent().children(".SelectedUserID").attr("id");
+	if(type=="userid"){
+		var userid = $(this).parent().parent().children(".SelectedUserID").html();
+		$.ajax({
+			type: "POST",
+			url: "DeleteUser",
+			data: "userid="+ userid,
+			cache: false,
+			success: function(msg)
+			{
+				if(msg != 'ERROR'){				
+					parent.slideUp('slow', function() {$(this).remove();});
+				}
+				else{
+					alert("Sorry! There was some problem.");
+				}			
+			}		
+		});
+	} else if(type=="groupid"){
+		var groupid = $(this).parent().parent().children(".SelectedUserID").html();
+		$.ajax({
+			type: "POST",
+			url: "DeleteGroup",
+			data: "groupid="+ groupid,
+			cache: false,
+			success: function(msg)
+			{
+				if(msg != 'ERROR'){				
+					parent.slideUp('slow', function() {$(this).remove();});
+				}
+				else{
+					alert("Sorry! There was some problem.");
+				}			
+			}		
+		});
+	}
+	
 });
 
 /*

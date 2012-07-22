@@ -18,31 +18,27 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 
+import server.connection.ServerConnectionHandler;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import fh.resources.json.FHGroupClass;
-import fh.resources.json.FHuserClass;
 import fh.resources.json.JSONClass;
 import fh.resources.json.JSONMessage;
 
-/**
- * Servlet implementation class for Servlet: DisplayGroups
- * @author rohit
- *
- */
  public class DisplayGroups extends javax.servlet.http.HttpServlet implements javax.servlet.Servlet {
    static final long serialVersionUID = 1L;
    
-    /* (non-Java-doc)
-	 * @see javax.servlet.http.HttpServlet#HttpServlet()
-	 */
 	public DisplayGroups() {
 		super();
 	}   	
  	
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		//Specify the Resource to be used on the server side.
+		String ResourceName = "DisplayGroups";
 		
 		String action = request.getParameter("action");
 		String gname = request.getParameter("getgroupbyname");
@@ -69,8 +65,11 @@ import fh.resources.json.JSONMessage;
 		///Create a HTTP client
 		DefaultHttpClient client = new DefaultHttpClient();
 		
+		//Create a server connection handler.
+		String ResourceUrl = new ServerConnectionHandler().getResourceURL(ResourceName);
+		
 		//The URL refers to the servlet as per the web.xml on the FID.
-		HttpPost httpPost = new HttpPost("http://localhost:8080/FID/DisplayGroups");
+		HttpPost httpPost = new HttpPost(ResourceUrl);
 		ArrayList<NameValuePair> postParameters = new ArrayList<NameValuePair>();
 		
 		//Send post it as a "json_message" parameter.

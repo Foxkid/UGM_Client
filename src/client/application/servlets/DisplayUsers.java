@@ -18,6 +18,8 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 
+import server.connection.ServerConnectionHandler;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -25,10 +27,6 @@ import fh.resources.json.FHuserClass;
 import fh.resources.json.JSONClass;
 import fh.resources.json.JSONMessage;
 
-/**
- * Servlet implementation class for Servlet: DisplayUsers
- * @author rohit
- */
 public class DisplayUsers extends javax.servlet.http.HttpServlet implements
 		javax.servlet.Servlet {
 	static final long serialVersionUID = 1L;
@@ -39,6 +37,9 @@ public class DisplayUsers extends javax.servlet.http.HttpServlet implements
 	
 	protected void doGet(HttpServletRequest request,
 		HttpServletResponse response) throws ServletException, IOException {
+		
+		//Specify the Resource to be used on the server side.
+		String ResourceName = "DisplayUsers";
 		
 		String action=request.getParameter("action");
 		String uname=request.getParameter("getuserbyid");
@@ -72,8 +73,11 @@ public class DisplayUsers extends javax.servlet.http.HttpServlet implements
 		
 		DefaultHttpClient client = new DefaultHttpClient();
 		
+		//Create a server connection handler.
+		String ResourceUrl = new ServerConnectionHandler().getResourceURL(ResourceName);
+		
 		//The URL refers to the servlet as per the web.xml on the FID.
-		HttpPost httpPost = new HttpPost("http://localhost:8080/FID/DisplayUsers");
+		HttpPost httpPost = new HttpPost(ResourceUrl);
 		ArrayList<NameValuePair> postParameters = new ArrayList<NameValuePair>();
 		
 		//Send post it as a "json_message" paramter.

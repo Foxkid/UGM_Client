@@ -34,11 +34,19 @@
     <url-pattern>/DisplayGroups</url-pattern>
   </servlet-mapping>
   <servlet>
-  	<servlet-name>DeleteUser</servlet-name>
-  	<servlet-class>client.application.servlets.DeleteUser</servlet-class>
+    <servlet-name>DeleteUser</servlet-name>
+    <servlet-class>client.application.servlets.DeleteUser</servlet-class>
   </servlet>
   <servlet-mapping>
-  	<servlet-name>DeleteUser</servlet-name>
-  	<url-pattern>/DeleteUser</url-pattern>
+    <servlet-name>DeleteUser</servlet-name>
+    <url-pattern>/DeleteUser</url-pattern>
+  </servlet-mapping>
+  <servlet>
+  	<servlet-name>DeleteGroup</servlet-name>
+  	<servlet-class>client.application.servlets.DeleteGroup</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>DeleteGroup</servlet-name>
+  	<url-pattern>/DeleteGroup</url-pattern>
   </servlet-mapping>
 </web-app>
