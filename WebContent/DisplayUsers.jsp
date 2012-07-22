@@ -26,7 +26,8 @@
 						FHuserClass fhuser = new FHuserClass();
 						fhuser = (FHuserClass)i.next();
 				%>
-						<li onclick="submitname('<%=fhuser.getId()%>');">
+						<li>
+							<div class="SelectedUserID" style="display: none;"> <%=fhuser.getId()%> </div>
 							<div class="hotspot">
 								<div class="preview">
 									<div class="color" style="background-color: #00316D"></div>

@@ -18,16 +18,21 @@ $('ul.list li').hover(function(){
 $(".deleteButton").click(function() {
 	var parent = $(this).parent().parent();
 	//parent.fadeOut('slow', function() {$(this).remove();});
-	parent.slideUp('slow', function() {$(this).remove();});
+	var userid = $(this).parent().parent().children(".SelectedUserID").html();
 	$.ajax({
 		type: "POST",
-		url: "",
-		data: dataString,
+		url: "DeleteUser",
+		data: "userid="+ userid,
 		cache: false,
-		success: function()
+		success: function(msg)
 		{
-
-		}
+			if(msg != 'ERROR'){				
+				parent.slideUp('slow', function() {$(this).remove();});
+			}
+			else{
+				alert("Sorry! There was some problem.");
+			}			
+		}		
 	});
 });
 
