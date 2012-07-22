@@ -13,7 +13,10 @@
 		<div id="contentHeader">
 			<div>&nbsp;</div>
 			<a id="DisplayUsers_Add" class="normalButton absoluteTopRight" href="addUser.jsp">++ Add New</a> 
-			<input type="text" name="SearchText" id="SearchText" /> <input type = "button" name = "SearchButton" value="Search" onclick="searchuser();" id="SearchButtonListUG"/>
+			<form action="SearchUser" method="POST">
+				<input type="text" name="SearchText" id="SearchText" /> 
+				<input type="submit" name="searchuser" value="Search" id="SearchButtonListUG"/>
+			</form>
 			<a id="DisplayUsers_Back" class="normalButton absoluteTopLeft" href="dashboard.jsp"> << Back </a>
 		</div>
 		
@@ -33,7 +36,7 @@
 									<div class="color" style="background-color: #00316D"></div>
 								</div>
 								<span class="title">
-									<%=fhuser.getFirst_name()%> <%=fhuser.getLast_name()%>
+									<%=fhuser.getLast_name()%> <%=fhuser.getFirst_name()%> 
 								</span>
 								<p class="description"><%=fhuser.getEmail()%></p>									
 								<a class="normalButton absoluteTopRight makeCopyButton" id="makeCopy" style="display: none">+ Make Copy</a> 

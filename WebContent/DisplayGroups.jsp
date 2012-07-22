@@ -13,8 +13,11 @@
 		<div id="contentHeader">
 		<div>&nbsp;</div>
 			<a id="DisplayUsers_Add" class="normalButton absoluteTopRight" href="addUser.jsp">++ Add New</a> 
-			<input type="text" name="SearchText" id="SearchText" /> <input type = "button" name = "SearchButton" value="Search" onclick="searchuser();" id="SearchButtonListUG"/>
-			<a id="DisplayUsers_Back" class="normalButton absoluteTopLeft" href="dashboard.jsp"> << Back </a>
+			<form action="SearchGroup" method="POST">
+				<input type="text" name="SearchText" id="SearchText" /> 
+				<input type="submit" name="searchgroup" value="Search" id="SearchButtonListUG"/>
+			</form>
+			<a id="DisplayGroups_Back" class="normalButton absoluteTopLeft" href="dashboard.jsp"> << Back </a>
 		</div>
 		
 		<% ArrayList<FHGroupClass> FHGroupList = (ArrayList<FHGroupClass>)request.getAttribute("groupList"); %>

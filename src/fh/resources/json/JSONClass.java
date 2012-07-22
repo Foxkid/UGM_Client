@@ -31,8 +31,21 @@ public class JSONClass {
     private String message;
     private String sessionID;
     private int resultCode;
+	private String searchParameter;
+    
+    public String getSearchParameter() {
+		return searchParameter;
+	}
 
-    public boolean isSuccess() {
+	public void setSearchParameter(String searchParameter) {
+		this.searchParameter = searchParameter;
+	}
+
+	public void setSessionID(String sessionID) {
+		this.sessionID = sessionID;
+	}
+
+	public boolean isSuccess() {
         return success;
     }
 

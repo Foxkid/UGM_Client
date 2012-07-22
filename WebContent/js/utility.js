@@ -57,6 +57,8 @@ $(".deleteButton").click(function() {
 	
 });
 
+
+
 /*
  * The following script is used to validate the entered email address on the index page.
  * @author - flipteam@framehawk.com

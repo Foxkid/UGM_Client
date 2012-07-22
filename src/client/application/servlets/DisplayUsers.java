@@ -30,106 +30,77 @@ import fh.resources.json.JSONMessage;
 public class DisplayUsers extends javax.servlet.http.HttpServlet implements
 		javax.servlet.Servlet {
 	static final long serialVersionUID = 1L;
-	
+
 	public DisplayUsers() {
 		super();
 	}
-	
+
 	protected void doGet(HttpServletRequest request,
-		HttpServletResponse response) throws ServletException, IOException {
-		
-		//Specify the Resource to be used on the server side.
+			HttpServletResponse response) throws ServletException, IOException {
+
+		// Specify the Resource to be used on the server side.
 		String ResourceName = "DisplayUsers";
-		
-		String action=request.getParameter("action");
-		String uname=request.getParameter("getuserbyid");
+
+		String action = request.getParameter("action");
+		String uname = request.getParameter("getuserbyid");
 		JSONMessage json_message = new JSONMessage();
-		
-		request.setAttribute("action", action);
-		
-		//This block used if the action is get all the users in the database.
-		if(action.equals("getUser")) {
-			request.setAttribute("getuserbyid",uname);
+
+		// Block execued if the action selected by the user is sort.
+		if (action.equals("sort")) {
+			json_message.setMessageType("SortuserListRequest");
 		} else {
-			request.setAttribute("getuserbyid","");
+			json_message.setMessageType("userListRequest");
 		}
-				
-		//Block execued if the action selected by the user is sort.
-		 if(action.equals("sort")){
-			 json_message.setMessageType("SortuserListRequest");
-		 } else {
-			 json_message.setMessageType("userListRequest");
-		 }
-		 
-		JSONClass jclass= new JSONClass();
+
+		JSONClass jclass = new JSONClass();
 
 		jclass.setSessionID();
-		
+
 		// Set the message payload.
 		json_message.setMessagePayload(jclass);
-		
+
 		// Get the final json string.
 		String jsonStringUserList = new Gson().toJson(json_message);
-		
+
 		DefaultHttpClient client = new DefaultHttpClient();
-		
-		//Create a server connection handler.
-		String ResourceUrl = new ServerConnectionHandler().getResourceURL(ResourceName);
-		
-		//The URL refers to the servlet as per the web.xml on the FID.
+
+		// Create a server connection handler.
+		String ResourceUrl = new ServerConnectionHandler()
+				.getResourceURL(ResourceName);
+
+		// The URL refers to the servlet as per the web.xml on the FID.
 		HttpPost httpPost = new HttpPost(ResourceUrl);
 		ArrayList<NameValuePair> postParameters = new ArrayList<NameValuePair>();
-		
-		//Send post it as a "json_message" paramter.
-    	postParameters.add(new BasicNameValuePair("json_message", jsonStringUserList));
-    	postParameters.add(new BasicNameValuePair("action", action));
-    	postParameters.add(new BasicNameValuePair("getuserbyid", uname));
-    	httpPost.setEntity(new UrlEncodedFormEntity(postParameters));
-		HttpResponse fidresponse = client.execute(httpPost);		
-		
-		HttpEntity entity  = fidresponse.getEntity();
-		BufferedReader br = new BufferedReader(new InputStreamReader(entity.getContent()));
-		
-		//Read the response from the FID.
+
+		// Send post it as a "json_message" paramter.
+		postParameters.add(new BasicNameValuePair("json_message",
+				jsonStringUserList));
+		postParameters.add(new BasicNameValuePair("getuserbyid", uname));
+		httpPost.setEntity(new UrlEncodedFormEntity(postParameters));
+		HttpResponse fidresponse = client.execute(httpPost);
+
+		HttpEntity entity = fidresponse.getEntity();
+		BufferedReader br = new BufferedReader(new InputStreamReader(
+				entity.getContent()));
+
+		// Read the response from the FID.
 		String lineRead = null;
 		String FID_response = "";
-		while ((lineRead=br.readLine())!=null) {
-			FID_response=FID_response+lineRead;
+		while ((lineRead = br.readLine()) != null) {
+			FID_response = FID_response + lineRead;
 		}
-				
-		String userListResponse = (String)FID_response;
-		Type type = new TypeToken<JSONMessage>() {}.getType();
+
+		String userListResponse = (String) FID_response;
+		Type type = new TypeToken<JSONMessage>() {
+		}.getType();
 		JSONMessage result = new Gson().fromJson(userListResponse, type);
 		JSONClass jsonPayload = result.getMessagePayload();
-		
+
 		ArrayList<FHuserClass> FHUserList = new ArrayList<FHuserClass>();
-		FHUserList = (ArrayList<FHuserClass>)jsonPayload.getFHUserClassList();
-		
-		if(action.equals("display")|| action.equals("sort"))
-		{			
-			request.setAttribute("userList", FHUserList);
-			getServletContext().getRequestDispatcher("/DisplayUsers.jsp").forward(request, response);
-	
-		}
-		else if(action.equals("getUser"))
-		{	
-			for(int i=0;i<FHUserList.size();i++)
-			{
-				
-				if(FHUserList.get(i).getId().equals(uname))
-				{
-				//	request.setAttribute("username", FHUserList.get(i).getUser_name());
-					request.setAttribute("firstname", FHUserList.get(i).getFirst_name());
-					request.setAttribute("lastname", FHUserList.get(i).getLast_name());
-					request.setAttribute("userid", uname);
-					request.setAttribute("email", FHUserList.get(i).getEmail());
-					request.setAttribute("password", FHUserList.get(i).getPassword());
-					request.setAttribute("profile_image", FHUserList.get(i).getProfile_image());
-					request.setAttribute("role_id",FHUserList.get(i).getRole_id() );
-			  }
-			}
-			getServletContext().getRequestDispatcher("/modifyUser.jsp").forward(request, response);
-		}
-		else{}		
-	}	
+		FHUserList = (ArrayList<FHuserClass>) jsonPayload.getFHUserClassList();
+
+		request.setAttribute("userList", FHUserList);
+		getServletContext().getRequestDispatcher("/DisplayUsers.jsp").forward(request, response);
+
+	}
 }
