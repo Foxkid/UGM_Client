@@ -58,11 +58,19 @@
     <url-pattern>/SearchUser</url-pattern>
   </servlet-mapping>
   <servlet>
-  	<servlet-name>SearchGroup</servlet-name>
-  	<servlet-class>client.application.servlets.SearchGroup</servlet-class>
+    <servlet-name>SearchGroup</servlet-name>
+    <servlet-class>client.application.servlets.SearchGroup</servlet-class>
   </servlet>
   <servlet-mapping>
-  	<servlet-name>SearchGroup</servlet-name>
-  	<url-pattern>/SearchGroup</url-pattern>
+    <servlet-name>SearchGroup</servlet-name>
+    <url-pattern>/SearchGroup</url-pattern>
+  </servlet-mapping>
+  <servlet>
+  	<servlet-name>LoadGroups</servlet-name>
+  	<servlet-class>client.application.servlets.LoadGroups</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>LoadGroups</servlet-name>
+  	<url-pattern>/LoadGroups</url-pattern>
   </servlet-mapping>
 </web-app>

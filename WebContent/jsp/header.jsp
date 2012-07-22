@@ -30,7 +30,10 @@
             	<span> You are logged in as </span>
             	<span class="loggedInUserName" >
             		<font color="#000000">
-            			<%= request.getSession().getAttribute("usernameSession")%>
+            			<!-- Do not remove this span, this id is used to retrieve the list of groups. -->
+            			<span id="UserSessionID">
+            				<%= request.getSession().getAttribute("usernameSession")%>
+            			</span>
             		</font>
             	</span>
             	<a href="/logout"> Log Out </a>

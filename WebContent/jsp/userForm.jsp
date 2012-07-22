@@ -60,8 +60,7 @@
 								<label> Privilege: </label>
 							</td>
 							<td>
-								<select id="Privilege" name="Privilege" style="width: 12em;">
-									<option>Test</option>
+								<select id="Privilege" name="Privilege" style="width: 12em;">									
 			 					</select>
 			 				</td>
 						</tr>
