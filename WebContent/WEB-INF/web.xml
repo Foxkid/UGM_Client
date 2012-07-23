@@ -66,11 +66,19 @@
     <url-pattern>/SearchGroup</url-pattern>
   </servlet-mapping>
   <servlet>
-  	<servlet-name>LoadGroups</servlet-name>
-  	<servlet-class>client.application.servlets.LoadGroups</servlet-class>
+    <servlet-name>LoadPrivileges</servlet-name>
+    <servlet-class>client.application.servlets.LoadPrivileges</servlet-class>
   </servlet>
   <servlet-mapping>
-  	<servlet-name>LoadGroups</servlet-name>
-  	<url-pattern>/LoadGroups</url-pattern>
+    <servlet-name>LoadPrivileges</servlet-name>
+    <url-pattern>/LoadPrivileges</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>LoadGroups</servlet-name>
+    <servlet-class>client.application.servlets.LoadGroups</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoadGroups</servlet-name>
+    <url-pattern>/LoadGroups</url-pattern>
+  </servlet-mapping>  
 </web-app>

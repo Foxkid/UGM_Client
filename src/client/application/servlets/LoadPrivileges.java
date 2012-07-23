@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,32 +20,30 @@ import org.apache.http.message.BasicNameValuePair;
 import server.connection.ServerConnectionHandler;
 
 import com.google.gson.Gson;
-
 import fh.resources.json.JSONClass;
 import fh.resources.json.JSONMessage;
 
-public class LoadGroups extends HttpServlet {
-	private static final long serialVersionUID = 1L;
 
+public class LoadPrivileges extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		//Specify the Resource to be used on the server side.
-		String ResourceName = "LoadGroups";
+		String ResourceName = "LoadPrivileges";
 		
 		JSONMessage json_message = new JSONMessage();		
 		JSONClass jclass= new JSONClass();
 		
 		//Add the user details to the				
-		json_message.setMessageType("groupListDropdownRequest");
+		json_message.setMessageType("privilegeListDropdownRequest");
 		jclass.setSessionID(request.getParameter("SessionId"));
 		
 		//Set the message payload.
 		json_message.setMessagePayload(jclass);
 		
 		//Get the final JSON string.
-		String jsonLoadGroup = new Gson().toJson(json_message);
-		
-		
+		String jsonLoadPrivilege = new Gson().toJson(json_message);
 		
 		///Create a HTTP client
 		DefaultHttpClient client = new DefaultHttpClient();
@@ -60,7 +57,7 @@ public class LoadGroups extends HttpServlet {
 		
 				
 		//Send post it as a "json_message" parameter.
-    	postParameters.add(new BasicNameValuePair("json_request_message", jsonLoadGroup));
+    	postParameters.add(new BasicNameValuePair("json_request_message", jsonLoadPrivilege));
     	httpPost.setEntity(new UrlEncodedFormEntity(postParameters));
 		HttpResponse fidresponse = client.execute(httpPost);		
 		
@@ -74,12 +71,13 @@ public class LoadGroups extends HttpServlet {
 			FID_response=FID_response+lineRead;
 		}
 				
-		String loadGroupsResponse = (String)FID_response;
+		String loadPrivilegesResponse = (String)FID_response;
 		
 		// Write response data as JSON back to the JQuery.
 	    response.setContentType("application/json");
 	    response.setCharacterEncoding("UTF-8");
-	    response.getWriter().write(loadGroupsResponse);
+	    response.getWriter().write(loadPrivilegesResponse);	    	
+		
 	}
 
 }

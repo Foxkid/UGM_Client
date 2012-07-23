@@ -69,8 +69,7 @@
 								<label> Group: </label>
 							</td>
 							<td>
-								<select id="Groups" name="group" style="width: 12em;">
-									<option>Test</option>
+								<select id="Groups" name="group" style="width: 12em;">									
 	 							</select>
 	 						</td>
 						</tr>
