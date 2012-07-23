@@ -80,7 +80,7 @@
   <servlet-mapping>
     <servlet-name>LoadGroups</servlet-name>
     <url-pattern>/LoadGroups</url-pattern>
-  </servlet-mapping>  
+  </servlet-mapping>
   <servlet>
     <servlet-name>InsertUser</servlet-name>
     <servlet-class>client.application.servlets.InsertUser</servlet-class>
@@ -88,5 +88,13 @@
   <servlet-mapping>
     <servlet-name>InsertUser</servlet-name>
     <url-pattern>/InsertUser</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>CopyUser</servlet-name>
+    <servlet-class>client.application.servlets.CopyUser</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CopyUser</servlet-name>
+    <url-pattern>/CopyUser</url-pattern>
   </servlet-mapping>  
 </web-app>

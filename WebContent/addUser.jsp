@@ -6,9 +6,7 @@
 					
 	-->
 		
-	<%@ include file="jsp/header.jsp"%>
-	
-	
+	<%@ include file="jsp/header.jsp"%>	
 	
 	<%@ include file="jsp/userForm.jsp"%>				
 	

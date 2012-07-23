@@ -58,6 +58,21 @@ $(".deleteButton").click(function() {
 });
 
 
+function postwith(url,parameters) {
+	  var myForm = document.createElement("form");
+	  myForm.method="post" ;
+	  myForm.action = url ;
+	  for (var key in parameters) {
+	    var myInput = document.createElement("input") ;
+	    myInput.setAttribute("name", key) ;
+	    myInput.setAttribute("value", parameters[key]);
+	    myForm.appendChild(myInput) ;
+	  }
+	  document.body.appendChild(myForm) ;
+	  myForm.submit() ;
+	  document.body.removeChild(myForm) ;
+}
+
 
 /*
  * The following script is used to validate the entered email address on the index page.

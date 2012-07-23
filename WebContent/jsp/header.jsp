@@ -8,7 +8,7 @@
 -->
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"  import="java.sql.*,fh.resources.json.*,java.util.ArrayList,java.util.ListIterator"%>
+	pageEncoding="ISO-8859-1"  import="java.sql.*,fh.resources.json.*,java.util.ArrayList,java.util.ListIterator,java.lang.reflect.Type,com.google.gson.Gson,com.google.gson.reflect.TypeToken"%>
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
