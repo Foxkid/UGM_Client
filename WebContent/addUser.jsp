@@ -32,7 +32,7 @@
 			$.post("LoadGroups", { SessionId: SessionId},
 					function(data) {
 						var options = [];
-						for(var index=0;index<data.messagePayload.FHGroupClassList.length;index++){
+						for(var index=1;index<data.messagePayload.FHGroupClassList.length;index++){
 							var group_name = data.messagePayload.FHGroupClassList[index].group_name;
 							options.push(group_name);						
 						}	
@@ -43,6 +43,22 @@
 						    );
 						});	
 				});
+		});
+		$('#add_user_submit').click(function() {
+			var email = $('#email').val();
+			var fname = $('#fname').val();
+			var lname = $('#lname').val();
+			var password = $('#password').val();
+			var privilege = $('#Privilege').val();
+			var groups = $('#Groups').val();
+			
+			$.post("InsertUser", {firstname:fname,lastname:lname,password:password,email:email,group:groups,privilege:privilege},
+				function(data) {				
+					alert(data.messagePayload.message);
+					$('#InsertUserForm').each (function(){
+						  this.reset();
+					});				
+			});
 		});
 	</script>
 				

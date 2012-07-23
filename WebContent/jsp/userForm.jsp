@@ -14,14 +14,22 @@
          <div class="innerContent">
             <div class="innerContentBackground">
 				<div id="userForm">
-				<form action="InsertUser" method="post">
+				<form id="InsertUserForm" method="post">
 					<table border="0" width="300">
+						<tr>
+							<td>
+								<label> Email: </label>
+							</td>
+							<td>
+								<input type="text" id="email" name="email"/>
+							</td>							
+						</tr>
 						<tr>
 							<td>
 								<label> First Name: </label>
 							</td>
 							<td>
-								<input type="text" id="fname" name="fname"/>
+								<input type="text" id="fname" name="firstname"/>
 							</td>
 						</tr>
 						<tr>
@@ -29,16 +37,9 @@
 								<label> Last Name: </label>
 							</td>
 							<td>
-								<input type="text" id="lname" name="lname"/></td>
-						</tr>
-						<tr>
-							<td>
-								<label> Email: </label>
+								<input type="text" id="lname" name="lastname"/>
 							</td>
-							<td>
-								<input type="text" id="email" name="email"/>
-							</td>
-						</tr>
+						</tr>						
 						<tr>
 							<td>
 								<label> Password: </label>
@@ -60,7 +61,7 @@
 								<label> Privilege: </label>
 							</td>
 							<td>
-								<select id="Privilege" name="Privilege" style="width: 12em;">									
+								<select id="Privilege" name="privilege" style="width: 12em;">									
 			 					</select>
 			 				</td>
 						</tr>
@@ -74,7 +75,7 @@
 	 						</td>
 						</tr>
 					</table>
-					<input type="submit" value="+ Submit" class="normalButton absoluteTopRight submitButton" id="add_user_submit"/>
+					<input type="button" value="+ Submit" class="normalButton absoluteTopRight submitButton" id="add_user_submit"/>
 				</form>
 			</div>
 	   	</div>

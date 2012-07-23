@@ -108,7 +108,7 @@ import fh.resources.json.JSONMessage;
 			{	
 				if(FHGroupList.get(i).getGroup_name().equals(gname))
 				{
-					 request.setAttribute("gid", FHGroupList.get(i).getId());
+					request.setAttribute("gid", FHGroupList.get(i).getId());
 					request.setAttribute("groupname", gname);
 					request.setAttribute("description", FHGroupList.get(i).getDescription());
 					

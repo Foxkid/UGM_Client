@@ -35,8 +35,7 @@ public class DisplayUsers extends javax.servlet.http.HttpServlet implements
 		super();
 	}
 
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		// Specify the Resource to be used on the server side.
 		String ResourceName = "DisplayUsers";
@@ -91,11 +90,10 @@ public class DisplayUsers extends javax.servlet.http.HttpServlet implements
 		}
 
 		String userListResponse = (String) FID_response;
-		Type type = new TypeToken<JSONMessage>() {
-		}.getType();
+		Type type = new TypeToken<JSONMessage>() {}.getType();
 		JSONMessage result = new Gson().fromJson(userListResponse, type);
 		JSONClass jsonPayload = result.getMessagePayload();
-
+			
 		ArrayList<FHuserClass> FHUserList = new ArrayList<FHuserClass>();
 		FHUserList = (ArrayList<FHuserClass>) jsonPayload.getFHUserClassList();
 
