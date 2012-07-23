@@ -29,7 +29,7 @@
 						FHuserClass fhuser = new FHuserClass();
 						fhuser = (FHuserClass)i.next();
 				%>
-						<li>
+						<li class="UserList_li">
 							<div class="SelectedUserID" style="display: none;" id="userid"> <%=fhuser.getId()%> </div>
 							<div class="hotspot">
 								<div class="preview">
@@ -38,8 +38,9 @@
 								<span class="title">
 									<%=fhuser.getLast_name()%> <%=fhuser.getFirst_name()%> 
 								</span>
-								<p class="description"><%=fhuser.getEmail()%></p>									
-								<a class="normalButton absoluteTopRight makeCopyButton" id="makeCopy" href="javascript:postwith('CopyUser',{userid:'<%=fhuser.getId()%>'})" style="display: none">+ Make Copy</a> 
+								<p class="description"><%=fhuser.getEmail()%></p>	
+															
+								<a class="normalButton absoluteTopRight makeCopyButton" id="makeCopy" href="javascript:postwith('CopyUser',{userid:'<%=fhuser.getId()%>', request_type:'Copy_User'})" style="display: none">+ Make Copy</a> 
 								<a class="normalButton absoluteTopRight deleteButton" id="delete_hover" style="display: none">X</a>
 							</div>	
 						</li>

@@ -54,7 +54,7 @@ $(".deleteButton").click(function() {
 			}		
 		});
 	}
-	
+	return false;
 });
 
 
@@ -73,6 +73,10 @@ function postwith(url,parameters) {
 	  document.body.removeChild(myForm) ;
 }
 
+$(".hotspot").click(function() {
+	var userid = $(this).parent().children(".SelectedUserID").html();	
+	postwith('CopyUser',{userid:userid, request_type:'Modify_User'});	
+});
 
 /*
  * The following script is used to validate the entered email address on the index page.

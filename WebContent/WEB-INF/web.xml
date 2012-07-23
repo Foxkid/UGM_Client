@@ -97,4 +97,12 @@
     <servlet-name>CopyUser</servlet-name>
     <url-pattern>/CopyUser</url-pattern>
   </servlet-mapping>  
+  <servlet>
+    <servlet-name>ModifyUser</servlet-name>
+    <servlet-class>client.application.servlets.ModifyUser</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ModifyUser</servlet-name>
+    <url-pattern>/ModifyUser</url-pattern>
+  </servlet-mapping>  
 </web-app>

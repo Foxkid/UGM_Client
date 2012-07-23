@@ -27,6 +27,7 @@ public class CopyUser extends HttpServlet {
 		String ResourceName = "UserDetails";
 				
 		String user_id = request.getParameter("userid");		
+		String request_type = request.getParameter("request_type");
 		
 		//Create get User Details.
 		FHuserClass user = new FHuserClass();
@@ -57,9 +58,13 @@ public class CopyUser extends HttpServlet {
 		
 		
 		if(jsonPayload.isSuccess()) {
-			//System.out.println("Det -- "+jsonPayload.isSuccess());
-			request.setAttribute("userList", FHUserList);
-			request.getRequestDispatcher("/CopyUsers.jsp").forward(request, response);
+			if(request_type.equals("Copy_User")) {
+				request.setAttribute("userList", FHUserList);
+				request.getRequestDispatcher("/CopyUsers.jsp").forward(request, response);
+			} else if(request_type.equals("Modify_User")) {
+				request.setAttribute("userList", FHUserList);
+				request.getRequestDispatcher("/ModifyUser.jsp").forward(request, response);
+			}
 		} else {
 			
 		}		

@@ -20,9 +20,10 @@
 		
 	<%@ include file="jsp/userDetailsForm.jsp"%>					
 	
-	<script src="js/FormFunctions.js" type="text/javascript"></script>
-	
 	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#email').attr("disabled","disabled");	
+		});
 		$('#add_user_submit').click(function() {
 			var email = $('#email').val();
 			var fname = $('#fname').val();
@@ -31,15 +32,13 @@
 			var privilege = $('#Privilege').val();
 			var groups = $('#Groups').val();
 			
-			$.post("InsertUser", {firstname:fname,lastname:lname,password:password,email:email,group:groups,privilege:privilege},
+			$.post("ModifyUser", {firstname:fname,lastname:lname,password:password,email:email,group:groups,privilege:privilege},
 				function(data) {				
-					alert(data.messagePayload.message);
-					$('#InsertUserForm').each (function(){
-						  this.reset();
-					});				
+					alert(data.messagePayload.message);									
 			});
 		});
 	</script>
 	
+	<script src="js/FormFunctions.js" type="text/javascript"></script>
 				
 	<%@ include file="jsp/footer.jsp"%>
