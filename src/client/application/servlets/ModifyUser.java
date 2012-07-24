@@ -6,6 +6,7 @@ import java.lang.reflect.Type;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import server.connection.ServerConnectionHandler;
 
@@ -59,7 +60,7 @@ public class ModifyUser extends javax.servlet.http.HttpServlet implements javax.
 		
 		//Create a JSON message.
 		json_message = new JSONMessage();
-		json_message.setMessageType("updateUserMessage");
+		json_message.setMessageType("updateUserRequest");
 		jclass = new JSONClass();
 		FHuserClass user = new FHuserClass();		
 		user.setFirst_name(first_name);
@@ -75,16 +76,15 @@ public class ModifyUser extends javax.servlet.http.HttpServlet implements javax.
 
 		//JSON String to be sent.
 		String jsonStringUser = new Gson().toJson(json_message);
-		
-		System.out.println(jsonStringUser);
-				
+
 		//Get the Response JSON from FID server.
-		String InsertUserResponse = new ServerConnectionHandler().getServerResponse(ResourceName, jsonStringUser);
-		
+		String UpdateUserResponse = new ServerConnectionHandler().getServerResponse(ResourceName, jsonStringUser);
+				
 		// Write response data as JSON back to the JQuery.
 	    response.setContentType("application/json");
 	    response.setCharacterEncoding("UTF-8");
-	    response.getWriter().write(InsertUserResponse);	
+	    response.getWriter().write(UpdateUserResponse);	
+	    
 	}
 }
 

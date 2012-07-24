@@ -62,6 +62,7 @@ import fh.resources.json.JSONMessage;
 		
 		//Get the final json string.
 		String jsonStringUserLogin = new Gson().toJson(json_message);
+		System.out.println(jsonStringUserLogin);
 		
 		//Call the FID Service to authenticate the credentials.		
 		DefaultHttpClient client = new DefaultHttpClient();

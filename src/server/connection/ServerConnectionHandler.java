@@ -59,7 +59,7 @@ public class ServerConnectionHandler {
 		//Create a HttpClient.
 		DefaultHttpClient client = new DefaultHttpClient();
 		HttpPost httpPost = new HttpPost(ResourceUrl);
-
+		System.out.println("CLIENT: " + ResourceUrl);
 		//Add the POST parameters.
 		ArrayList<NameValuePair> postParameters = new ArrayList<NameValuePair>();
 		postParameters.add(new BasicNameValuePair("json_request_message", RequestJSON));		

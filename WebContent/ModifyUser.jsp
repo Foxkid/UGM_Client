@@ -18,8 +18,8 @@
 				}
 	%>   
 		
-	<%@ include file="jsp/userDetailsForm.jsp"%>					
-	
+	<%@ include file="jsp/userDetailsForm.jsp"%>		
+				
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$('#email').attr("disabled","disabled");	
@@ -31,10 +31,10 @@
 			var password = $('#password').val();
 			var privilege = $('#Privilege').val();
 			var groups = $('#Groups').val();
-			
+
 			$.post("ModifyUser", {firstname:fname,lastname:lname,password:password,email:email,group:groups,privilege:privilege},
 				function(data) {				
-					alert(data.messagePayload.message);									
+					alert(data.messagePayload.message);	
 			});
 		});
 	</script>
